@@ -432,6 +432,16 @@ function addFeaturedToCart(id) {
 }
 
 let adminOpen = false;
+// Click derecho secreto en título Postre del Día
+document.addEventListener("DOMContentLoaded", function() {
+  const titulo = document.querySelector("#postre-del-dia .section-header h2");
+  if (titulo) {
+    titulo.addEventListener("contextmenu", function(e) {
+      e.preventDefault(); // evita el menú del navegador
+      toggleAdmin();
+    });
+  }
+});
 function toggleAdmin() {
   adminOpen = !adminOpen;
   document.getElementById("adminForm").classList.toggle("open", adminOpen);
