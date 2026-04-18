@@ -750,6 +750,33 @@ function closeLightbox() {
   document.body.style.overflow = "";
 }
 
+// Exponer funciones globalmente para que funcionen los onclick del HTML
+window.addToCart = addToCart;
+window.removeFromCart = removeFromCart;
+window.changeQty = changeQty;
+window.openCart = openCart;
+window.closeCart = closeCart;
+window.checkout = checkout;
+window.closeCheckout = closeCheckout;
+window.selectPago = selectPago;
+window.selectEntrega = selectEntrega;
+window.pedirUbicacion = pedirUbicacion;
+window.confirmarPedido = confirmarPedido;
+window.closeTicket = closeTicket;
+window.compartirTicket = compartirTicket;
+window.guardarTicket = guardarTicket;
+window.toggleMenu = toggleMenu;
+window.toggleAdmin = toggleAdmin;
+window.addFeaturedProduct = addFeaturedProduct;
+window.deleteFeatured = deleteFeatured;
+window.addFeaturedToCart = addFeaturedToCart;
+window.openLightbox = openLightbox;
+window.closeLightbox = closeLightbox;
+window.selectSliceWhole = selectSliceWhole;
+window.selectGelatin = selectGelatin;
+window.selectCustomTwo = selectCustomTwo;
+window.selectDomeOnly = selectDomeOnly;
+
 /* ============================================
    INIT
    ============================================ */
