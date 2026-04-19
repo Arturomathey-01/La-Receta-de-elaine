@@ -1,7 +1,7 @@
 // ============================================
 //   La Receta De Elaine — script.js
 // ============================================
-import { escucharPostresDia, agregarPostreDia, eliminarPostreDia, descontarStock, guardarPedido } from "./firebase.js";
+const { escucharPostresDia, agregarPostreDia, eliminarPostreDia, descontarStock, guardarPedido } = window.firebaseFunctions || {};
 const PRODUCTS = [
   {
     id: 1,
@@ -581,7 +581,7 @@ try {
     pago: pagoTexto,
     entrega: selectedEntrega === "domicilio" ? `A domicilio — ${direccion}` : "Recoger en tienda"
   };
-
+{
   window.open(`https://wa.me/529222340075?text=${msg}`, "_blank");
 
   orderCounter++;
