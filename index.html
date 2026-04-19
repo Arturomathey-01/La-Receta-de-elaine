@@ -247,8 +247,16 @@
   <div class="toast" id="toast"></div>
 
   <!-- html2canvas para guardar ticket como imagen -->
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script>
-<script type="module" src="firebase.js"></script>
-<script type="module" src="script.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script>
+<script type="module">
+  import { escucharPostresDia, agregarPostreDia, eliminarPostreDia, descontarStock, guardarPedido } from "./firebase.js";
+  
+  window.firebaseFunctions = { escucharPostresDia, agregarPostreDia, eliminarPostreDia, descontarStock, guardarPedido };
+  
+  // Cargar script principal después
+  const s = document.createElement("script");
+  s.src = "./script.js";
+  document.body.appendChild(s);
+</script>
 </body>
 </html>
