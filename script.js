@@ -549,7 +549,7 @@ try {
   folio = String(orderCounter).padStart(4, "0");
   orderCounter++;
 }
-};
+}
   const fecha = new Date().toLocaleString("es-MX", {
     day: "2-digit", month: "2-digit", year: "numeric",
     hour: "2-digit", minute: "2-digit"
