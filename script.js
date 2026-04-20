@@ -1,7 +1,7 @@
 // ============================================
 //   La Receta De Elaine — script.js
 // ============================================
-const { escucharPostresDia, agregarPostreDia, eliminarPostreDia, descontarStock, guardarPedido } = window.firebaseFunctions || {};
+// Firebase se carga desde index.html vía window
 const PRODUCTS = [
   {
     id: 1,
@@ -536,7 +536,7 @@ async function confirmarPedido() {
   // Generar folio desde Firebase
   let folio;
   try {
-    folio = await guardarPedido({
+    folio = await window.guardarPedido({
       items: cart.map(i => ({ name: i.name, qty: i.qty, price: i.price })),
       total: getTotal(),
       pago: selectedPago,
@@ -784,7 +784,7 @@ window.selectDomeOnly = selectDomeOnly;
 renderProducts();
 updateCartUI();
 // Escuchar postres del día en tiempo real
-escucharPostresDia(lista => {
+window.escucharPostresDia(lista => {
   featuredList = lista;
   renderFeaturedGrid();
 });
