@@ -516,7 +516,6 @@ function pedirUbicacion() {
     () => { hint.textContent = "⚠️ No se pudo obtener. Escribe tu dirección."; }
   );
 }
-
 async function confirmarPedido() {
   const direccion = document.getElementById("inputDireccion").value.trim();
   if (selectedEntrega === "domicilio" && !direccion) {
@@ -534,22 +533,21 @@ async function confirmarPedido() {
     }
   });
 
-  
   // Generar folio desde Firebase
-let folio;
-try {
-  folio = await guardarPedido({
-    items: cart.map(i => ({ name: i.name, qty: i.qty, price: i.price })),
-    total: getTotal(),
-    pago: selectedPago,
-    entrega: selectedEntrega
-  });
-} catch(err) {
-  console.error("Error Firebase:", err);
-  folio = String(orderCounter).padStart(4, "0");
-  orderCounter++;
-}
-}
+  let folio;
+  try {
+    folio = await guardarPedido({
+      items: cart.map(i => ({ name: i.name, qty: i.qty, price: i.price })),
+      total: getTotal(),
+      pago: selectedPago,
+      entrega: selectedEntrega
+    });
+  } catch(err) {
+    console.error("Error Firebase:", err);
+    folio = String(orderCounter).padStart(4, "0");
+    orderCounter++;
+  }
+
   const fecha = new Date().toLocaleString("es-MX", {
     day: "2-digit", month: "2-digit", year: "numeric",
     hour: "2-digit", minute: "2-digit"
@@ -558,6 +556,7 @@ try {
   const itemsTexto = cart.map(i =>
     `• ${i.name} x${i.qty} — $${(i.price * i.qty).toFixed(2)}`
   ).join("%0A");
+
   const pagoTexto = selectedPago === "efectivo" ? "💵 Efectivo" : "🏦 Transferencia";
   const entregaTexto = selectedEntrega === "domicilio"
     ? `🏠 A domicilio%0A📍 ${encodeURIComponent(direccion)}`
@@ -572,8 +571,7 @@ try {
     `💳 *Pago:* ${pagoTexto}%0A` +
     `🚚 *Entrega:* ${entregaTexto}`;
 
-  // Guardar datos del ticket antes de limpiar carrito
-  const ticketData = {
+    const ticketData = {
     folio,
     fecha,
     items: [...cart],
@@ -581,20 +579,15 @@ try {
     pago: pagoTexto,
     entrega: selectedEntrega === "domicilio" ? `A domicilio — ${direccion}` : "Recoger en tienda"
   };
-{
   window.open(`https://wa.me/529222340075?text=${msg}`, "_blank");
-
   orderCounter++;
   cart = [];
   updateCartUI();
   renderFeaturedGrid();
   closeCheckout();
-
-  // Mostrar ticket
   mostrarTicket(ticketData);
 }
-
-/* ============================================
+/* ============================================/* 
    TICKET
    ============================================ */
 function mostrarTicket(data) {
