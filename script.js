@@ -544,7 +544,7 @@ async function confirmarPedido() {
     });
   } catch(err) {
     console.error("Error Firebase:", err);
-    folio = String(orderCounter).padStart(4, "0");
+    const folio = String(orderCounter).padStart(4, "0");
     orderCounter++;
   }
 
