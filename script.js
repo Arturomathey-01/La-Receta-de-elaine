@@ -553,23 +553,27 @@ async function confirmarPedido() {
     hour: "2-digit", minute: "2-digit"
   });
 
-  const itemsTexto = cart.map(i =>
-    `• ${i.name} x${i.qty} — $${(i.price * i.qty).toFixed(2)}`
-  ).join("%0A");
+ const itemsTexto = cart.map(i =>
+  `• ${i.name} x${i.qty} — $${(i.price * i.qty).toFixed(2)}`
+).join("\n");
 
-  const pagoTexto = selectedPago === "efectivo" ? "💵 Efectivo" : "🏦 Transferencia";
-  const entregaTexto = selectedEntrega === "domicilio"
-    ? `🏠 A domicilio%0A📍 ${encodeURIComponent(direccion)}`
-    : "🏪 Recoger en tienda";
+const pagoTexto = selectedPago === "efectivo" ? "💵 Efectivo" : "🏦 Transferencia";
+const entregaTexto = selectedEntrega === "domicilio"
+  ? `🏠 A domicilio\n📍 ${direccion}`
+  : "🏪 Recoger en tienda";
 
-  const msg =
-    `🍰 *Nuevo Pedido - La Receta de Elaine*%0A` +
-    `🔖 Folio: *#${folio}*%0A` +
-    `📅 ${fecha}%0A%0A` +
-    `${itemsTexto}%0A%0A` +
-    `💰 *Total: $${getTotal().toFixed(2)}*%0A%0A` +
-    `💳 *Pago:* ${pagoTexto}%0A` +
-    `🚚 *Entrega:* ${entregaTexto}`;
+const mensajeTexto = `🍰 *Nuevo Pedido - La Receta de Elaine*
+🔖 Folio: *#${folio}*
+📅 ${fecha}
+
+${itemsTexto}
+
+💰 *Total: $${getTotal().toFixed(2)}*
+💳 *Pago:* ${pagoTexto}
+🚚 *Entrega:* ${entregaTexto}`;
+
+const msg = encodeURIComponent(mensajeTexto);
+window.open(`https://wa.me/529222340075?text=${msg}`, "_blank");
 
     const ticketData = {
     folio,
