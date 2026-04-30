@@ -258,8 +258,10 @@
   window.eliminarPostreDia = eliminarPostreDia;
   window.descontarStock = descontarStock;
   window.guardarPedido = guardarPedido;
-</script>
-<script src="script.js" defer></script>
+ 
+  const s = document.createElement("script");
+  s.src = "./script.js";
+  document.body.appendChild(s);
 </script>
 </body>
 </html>
